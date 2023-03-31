@@ -1,0 +1,23 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+System(vscode, "VS Code IDE", "Hosts the plugin")
+System_Boundary(plugin, "TDD-With-GPT") {
+  Container(behavior, "Behavior", "Listens to events and dispatches actions")
+  Container(selector, "Selector", "Inspects actions and calls Provider")
+  Container(provider, "Provider", "Produces Diff from Scenario")
+  Container(gptPrompts, "GPTPrompts", "Calls GPTInfra")
+  Container(gptInfra, "GPTInfra", "Calls GPT API")
+  Container(viewModel, "ViewModel", "Stores state and emits events based on user interaction")
+}
+
+System(ideView, "IDE Plugin View", "Renders in IDE")
+
+Rel(behavior, selector, "dispatches")
+Rel(selector, provider, "calls (optional)")
+Rel(provider, gptPrompts, "calls")
+Rel(gptPrompts, gptInfra, "calls")
+Rel(selector, viewModel, "calls")
+Rel(vscode, ideView, "Renders")
+Rel(behavior, vscode, "Listens to events")
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+System_Boundary(plugin, "TDD-With-GPT") {
+  Component(behavior, "Behavior", "Listens to events and dispatches actions")
+  Component(selector, "Selector", "Inspects actions and calls Provider")
+  Component(provider, "Provider", "Produces Diff from Scenario")
+  Component(gptPrompts, "GPTPrompts", "Calls GPTInfra")
+  Component(gptInfra, "GPTInfra", "Calls GPT API")
+  Component(viewModel, "ViewModel", "Stores state and emits events based on user interaction")
+}
+
+System(vscode, "VS Code IDE")
+System(ideView, "IDE Plugin View")
+
+Rel(behavior, selector, "dispatches")
+Rel(selector, provider, "calls (optional)")
+Rel(provider, gptPrompts, "calls")
+Rel(gptPrompts, gptInfra, "calls")
+Rel(selector, viewModel, "calls")
+Rel(behavior, vscode, "Listens to events")
+Rel(viewModel, ideView, "Updates view")
+@enduml

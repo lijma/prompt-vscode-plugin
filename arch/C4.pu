@@ -1,0 +1,77 @@
+@startuml
+entity Event {
+  +name: String
+  +payload: Object
+}
+
+entity Action {
+  +type: Enum (INTERACT, OPERATION)
+  +payload: Object
+}
+
+entity Scenario {
+  +name: String
+  +payload: Object
+}
+
+entity Diff {
+  +any JSON
+}
+
+class Behavior {
+  +listen(Event): void
+  +dispatch(Action): void
+}
+
+class Selector {
+  +inspect(Action): void
+}
+
+class Provider {
+  +output(Scenario): Diff
+}
+
+class GPTPrompts {
+  +call(GPTInfra): Object
+}
+
+class GPTInfra {
+  +callGPTAPI(): Object
+}
+
+class ViewModel {
+  +storeState(): void
+  +emitEvent(): Event
+}
+
+class VSCodeIDE <<external>> {
+  +events: Event[]
+}
+
+class IDEPluginView <<external>> {
+  +render(ViewModel): void
+}
+
+enum ActionType {
+  INTERACT
+  OPERATION
+}
+
+Behavior --> Selector : dispatches
+Selector --> Provider : calls (optional)
+Provider --> GPTPrompts : calls
+GPTPrompts --> GPTInfra : calls
+Selector --> ViewModel : calls
+
+Behavior --> VSCodeIDE : listens to events
+ViewModel --> IDEPluginView : updates view
+
+Behavior -left-> Event : listens >>
+Behavior -right-> Action : dispatches >>
+Action -right-> Scenario : uses (OperationAction) >>
+Provider -right-> Scenario : inputs >>
+Provider -up-> Diff : outputs >>
+ActionType <-up- Action : determines >>
+
+
+@enduml
