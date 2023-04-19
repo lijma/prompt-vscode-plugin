@@ -78,7 +78,7 @@ response from chatgpt
 
 #### prepare input
 
-i build a visusal studio code plugin called `TDD-WITH-GPT` by using `Yo code` command,
+i want develop a visusal studio code plugin called `tdd-with-gpt` by using `yo code` command
 
 * input
 
@@ -164,10 +164,26 @@ ActionType <-up- Action : determines >>
 @enduml
 ```
 
-could you help give some guideline how to implement this? and show me the project structure then
+please design `implement strategy` for me and show me the project structure finally
 
 * output
 
-![1681892120868](image/1-arch/1681892120868.png)
+![1681907318737](image/1-arch/1681907318737.png)
 
-![1681892135753](image/1-arch/1681892135753.png)
+![1681907364156](image/1-arch/1681907364156.png)
+
+proceduer design
+
+```
+Create a Behavior class to handle the overall behavior of the plugin, including listening to events, dispatching actions, and maintaining the context.
+
+Implement a Selector class to select the appropriate provider based on the action.
+
+Create a Provider class to produce the required output, which may involve calling external services such as GPTPrompts.
+
+Implement a ViewModel class responsible for rendering the output based on the difference between the previous and current states.
+
+Create an enum to represent the different types of actions that the plugin can perform.
+
+Define Event, Action, Scenario, and Diff classes as interfaces for communication between different components
+```
