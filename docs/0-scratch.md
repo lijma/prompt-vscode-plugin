@@ -30,7 +30,6 @@ vsce package
 
 ```
 
-
 ### Generated Package
 
 ![1681885835870](image/scratch/1681885835870.png)

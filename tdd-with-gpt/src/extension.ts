@@ -18,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
 		// Display a message box to the user
 		vscode.window.showInformationMessage('Hello World from tdd-with-gpt!');
 	});
-
+	
 	context.subscriptions.push(disposable);
 }
 
