@@ -9,6 +9,8 @@ extention will invoke `OpenAI` api to get a result
 
 ![1681959571453](image/5-debugging/1681959571453.png)
 
-* files for human intervene
+* files for human intervene,
+  * see git commit "US1 - human intervene changes" for details
+
 
 ![1681959727832](image/5-debugging/1681959727832.png)
