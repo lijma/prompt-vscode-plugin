@@ -1,38 +1,33 @@
 import { Behavior } from "./Behavior";
 import { ActionType } from "./ActionType";
-import { Scenario } from "./Scenario";
-import { Provider } from "./Provider";
+import { HiScenario } from "./HiScenario";
+import { DefaultSelector } from "./DefaultSelector";
 import * as vscode from 'vscode';
+import { Action } from "./Action";
+import { Event } from "./Event";
 
-export class HiBehavior implements Behavior {
+export default class HiBehavior implements Behavior {
   private context: vscode.ExtensionContext;
 
   constructor(context: vscode.ExtensionContext) {
     this.context = context;
   }
 
-  listenEvent(): vscode.Event<vscode.TextDocument> {
-    return vscode.commands.registerTextEditorCommand('tdd-with-gpt.hi', async () => {
-      const scenario = {
-        name: ActionType.INTERACT,
-        payload: Scenario
-      };
-      const provider = new DefaultSelector().selectProvider(scenario);
-      const diff = await provider.produceDiff(scenario);
-      const editor = vscode.window.activeTextEditor;
-      if (editor) {
-        await editor.edit(editBuilder => {
-          editBuilder.insert(new vscode.Position(0, 0), JSON.stringify(diff));
-        });
+  listenEvent(event: Event): void {
+      if (event.name === 'hi'){
+          const action = new Action(ActionType.INTERACT,new HiScenario());
+          this.dispatchAction(action);
       }
-    });
   }
 
   getContext(): vscode.ExtensionContext {
     return this.context;
   }
 
-  dispatchAction(): void {
-    // not used
+  async dispatchAction(action: Action): Promise<void> {
+    const provider = new DefaultSelector().inspectAction(action);
+    //Missing interactions to select in DefaultSelection
+    const diff = await provider.produceDiff(new HiScenario());
+    vscode.window.showInformationMessage(JSON.stringify(diff));
   }
 }

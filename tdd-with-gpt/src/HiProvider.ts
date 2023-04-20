@@ -4,11 +4,13 @@ import { Diff } from "./Diff";
 import { GptPromptService } from "./GptPromptService";
 
 export class HiProvider implements Provider {
+
   async produceDiff(scenario: Scenario): Promise<Diff> {
     const gptPromptService = new GptPromptService();
-    const response = await gptPromptService.callChatGPT(scenario.payload.prompt);
+    const response = await gptPromptService.callChatGPT(scenario.name);
     return {
-      json: response.data.choices[0].text
+      json: response.data.result
     };
   }
+
 }

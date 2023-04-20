@@ -1,5 +1,4 @@
 import { Selector } from "./Selector";
-import { Scenario } from "./Scenario";
 import { HiProvider } from "./HiProvider";
 import { Provider } from "./Provider";
 import { Action } from "./Action";
@@ -9,7 +8,7 @@ export class DefaultSelector implements Selector {
   
   inspectAction(action: Action): Provider {
     // not used
-    switch (action.payload) {
+    switch (action.type) {
         case ActionType.INTERACT:
           return new HiProvider();
         default:
