@@ -31,21 +31,3 @@ pair with chatgpt to generate tdd-with-gpt plugin user story 1
 * type not found issue
 * library not found issue
 * architect issue not meet requirements
-
-## 加入星球学习更多、相互交流、谈合作
-
-* ChatGPT帮我实现React前端项目
-* ChatGPT帮我实现Python项目
-* ChatGPT帮我实现Java后端项目
-* [高阶] ChatGPT帮我实现Visual Studio Code插件
-* [高阶] ChatGPT帮我实现Python爬虫
-* [高阶] ChatGPT帮我实现自动发微信公众号
-* [高阶] ChatGPT帮我实现自动发星球动态
-* [高阶] ChatGPT帮我爬油管、创造短视频
-* [高阶] ChatGPT帮我发送抖音和Tiktok
-* 更多课程等你来参与~
-
-![img.png](docs/xq.png)
-
-## 微信加好友了解细节
-![img.png](docs/contact.png)
